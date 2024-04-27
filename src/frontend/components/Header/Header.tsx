@@ -11,7 +11,9 @@ const Header = () => {
       <S.NavBar>
         <S.Container>
           <S.NavBarBrand href="/">
-            <a><S.BrandImg /></a>
+            <S.BrandTitle>
+              Merlinn Sho<S.BrandTitleEmphasis>p</S.BrandTitleEmphasis>
+            </S.BrandTitle>
           </S.NavBarBrand>
           <S.Controls>
             <CurrencySwitcher />
