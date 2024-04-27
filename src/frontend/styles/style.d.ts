@@ -6,6 +6,7 @@ import 'styled-components';
 declare module 'styled-components' {
   export interface DefaultTheme {
     colors: {
+      msYellow: string;
       otelBlue: string;
       otelYellow: string;
       otelGray: string;
@@ -13,7 +14,7 @@ declare module 'styled-components' {
       backgroundGray: string;
       lightBorderGray: string;
       borderGray: string;
-      textGray: string; 
+      textGray: string;
       textLightGray: string;
       white: string;
     };

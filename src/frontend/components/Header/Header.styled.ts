@@ -53,3 +53,14 @@ export const Controls = styled.div`
   display: flex;
   height: 60px;
 `;
+
+export const BrandTitle = styled.p`
+  color: rgb(234 179 8);
+  cursor: pointer;
+  font-size: 35px;
+`;
+
+export const BrandTitleEmphasis = styled.span`
+  color: black;
+  font-size: 35px;
+`;

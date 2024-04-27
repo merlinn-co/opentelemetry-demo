@@ -5,6 +5,7 @@ import { DefaultTheme } from 'styled-components';
 
 const Theme: DefaultTheme = {
   colors: {
+    msYellow: '#EAB308',
     otelBlue: '#5262A8',
     otelYellow: '#EAAA3B',
     otelGray: '#403F4B',
