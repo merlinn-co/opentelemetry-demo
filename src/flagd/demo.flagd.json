@@ -23,19 +23,19 @@
       "description": "Triggers full manual garbage collections in the ad service",
       "state": "ENABLED",
       "variants": {
-          "on": true,
-          "off": false
-        },
-        "defaultVariant": "off"
+        "on": true,
+        "off": false
+      },
+      "defaultVariant": "off"
     },
     "adServiceHighCpu": {
       "description": "Triggers high cpu load in the ad service",
       "state": "ENABLED",
       "variants": {
-          "on": true,
-          "off": false
-        },
-        "defaultVariant": "off"
+        "on": true,
+        "off": false
+      },
+      "defaultVariant": "off"
     },
     "adServiceFailure": {
       "description": "Fail ad service",
@@ -50,14 +50,8 @@
           {
             "var": "session"
           },
-          [
-            "on",
-            10
-          ],
-          [
-            "off",
-            90
-          ]
+          ["on", 10],
+          ["off", 90]
         ]
       }
     },
@@ -77,7 +71,7 @@
         "on": true,
         "off": false
       },
-      "defaultVariant": "off"
+      "defaultVariant": "on"
     },
     "paymentServiceUnreachable": {
       "description": "Payment service is unavailable",
