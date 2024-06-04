@@ -138,7 +138,7 @@ Emeritus:
 [Tracetest]: https://github.com/kubeshop/opentelemetry-demo
 [Uptrace]: https://github.com/uptrace/uptrace/tree/master/example/opentelemetry-demo
 
-## Custom fork instructions
+## Custom fork instructions (Merlinn)
 
 This is a fork of the original opentelemetry-demo. It contains the following modifications:
 
