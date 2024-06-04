@@ -146,6 +146,14 @@ This is a fork of the original opentelemetry-demo. It contains the following mod
 - Uses alertmanager to fire alerts based on Prometheus. Alert manager is configured
 - Contains some UI changes
 
+### Usage (TL;DR)
+
+1. Clone this fork
+2. Run `make start`.
+
+That's it. Now all the microservices should be up. It's an e-commerce app so you can navigate to http://localhost:8080/
+and play with the UI.
+
 ### Export logs to Coralogix
 
 In order to export logs to Coralogix, you need to change the root .env file.
