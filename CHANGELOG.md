@@ -13,16 +13,38 @@ the release.
   ([#1506](https://github.com/open-telemetry/opentelemetry-demo/pull/1506))
 * [repo] add traceBasedTests image to published images
   ([#1507](https://github.com/open-telemetry/opentelemetry-demo/pull/1507))
-* [cartservice] update .NET package to 1.8.0 release
-  ([#1514](https://github.com/open-telemetry/opentelemetry-demo/pull/1514))
 * [quoteservice] add manual metric, export logs periodically
   ([#1519](https://github.com/open-telemetry/opentelemetry-demo/pull/1519))
 * [flagd] export flagd traces to otel collector
   ([#1522](https://github.com/open-telemetry/opentelemetry-demo/pull/1522))
 * [frontend] Pass down image optimization requests to imageprovider
   ([#1522](https://github.com/open-telemetry/opentelemetry-demo/pull/1522))
+* [kafka] add kafkaQueueProblems feature flag
+  ([#1528](https://github.com/open-telemetry/opentelemetry-demo/pull/1528))
 * [otelcollector] Add `redisreceiver`
   ([#1537](https://github.com/open-telemetry/opentelemetry-demo/pull/1537))
+* [traceBasedTests] update to v1.0.0
+  ([#1551](https://github.com/open-telemetry/opentelemetry-demo/pull/1551))
+* [flagd] update to 0.10.1 and set 50M memory limit
+  ([#1554](https://github.com/open-telemetry/opentelemetry-demo/pull/1554))
+* [loadgenerator] Configure feature flag evaluation tracing
+  ([#1553](https://github.com/open-telemetry/opentelemetry-demo/pull/1553))
+* [recommendationservice] Configure feature flag evaluation tracing
+  ([#1553](https://github.com/open-telemetry/opentelemetry-demo/pull/1553))
+* [loadgenerator] Fix feature flag hooks setter method
+  ([#1556](https://github.com/open-telemetry/opentelemetry-demo/pull/1556))
+* [frontend] Slowloading of images based on imageSlowLoad flag
+  ([#1515](https://github.com/open-telemetry/opentelemetry-demo/pull/1486))
+* [frontend] Fix imageloading issues on optimized images. bump next.js version
+  ([#1571](https://github.com/open-telemetry/opentelemetry-demo/pull/1571))
+* [cartservice] bump .NET package to 1.8.1 release
+  ([#1514](https://github.com/open-telemetry/opentelemetry-demo/pull/1514)), ([#1580](https://github.com/open-telemetry/opentelemetry-demo/pull/1580))
+* [kafka] Fix permission issue with the telemetry agent when running in docker compose
+  ([#1574](https://github.com/open-telemetry/opentelemetry-demo/pull/1574))
+* [flagd] Add flagd service to minimal docker compose deployment
+  ([#1585](https://github.com/open-telemetry/opentelemetry-demo/pull/1585))
+* [kafka] Increase memory and Java heap limits
+  ([#1592](https://github.com/open-telemetry/opentelemetry-demo/pull/1592))
 
 ## 1.9.0
 
