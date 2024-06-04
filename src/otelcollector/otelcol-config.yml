@@ -40,6 +40,8 @@ exporters:
     endpoint: "http://prometheus:9090/api/v1/otlp"
     tls:
       insecure: true
+    headers:
+      authorization: Basic YWRtaW46ZHVkdQ==
   opensearch:
     logs_index: otel
     http:

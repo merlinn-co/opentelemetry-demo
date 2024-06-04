@@ -664,7 +664,20 @@ services:
     environment:
       - METRICS_STORAGE_TYPE=prometheus
     logging: *logging
-
+  # Loki
+  loki:
+    image: grafana/loki:2.9.2
+    container_name: loki
+    deploy:
+      resources:
+        limits:
+          memory: 100M
+    ports:
+      - 3100
+    volumes:
+      - ./docker_data/loki:/loki
+    command: -config.file=/etc/loki/local-config.yaml
+    logging: *logging
   # Grafana
   grafana:
     image: ${GRAFANA_IMAGE}
@@ -709,6 +722,10 @@ services:
       - OTEL_COLLECTOR_HOST
       - OTEL_COLLECTOR_PORT_GRPC
       - OTEL_COLLECTOR_PORT_HTTP
+      - CORALOGIX_DOMAIN
+      - CORALOGIX_APP_NAME
+      - CORALOGIX_SUBSYS_NAME
+      - CORALOGIX_PRIVATE_KEY
 
   # Prometheus
   prometheus:
@@ -722,10 +739,13 @@ services:
       - --storage.tsdb.path=/prometheus
       - --web.enable-lifecycle
       - --web.route-prefix=/
+      - --web.config.file=/etc/prometheus/web-config.yaml
       - --enable-feature=exemplar-storage
       - --enable-feature=otlp-write-receiver
     volumes:
+      - ./src/prometheus/rules-config.yaml:/etc/prometheus/rules-config.yaml
       - ./src/prometheus/prometheus-config.yaml:/etc/prometheus/prometheus-config.yaml
+      - ./src/prometheus/web-config.yaml:/etc/prometheus/web-config.yaml
     deploy:
       resources:
         limits:
@@ -734,8 +754,15 @@ services:
     ports:
       - "${PROMETHEUS_SERVICE_PORT}:${PROMETHEUS_SERVICE_PORT}"
     logging: *logging
-
-  # OpenSearch
+  alert-manager:
+    image: prom/alertmanager
+    container_name: alert-manager
+    volumes:
+      - "./src/prometheus/alertmanager-config.yaml:/alertmanager/alertmanager.yaml"
+    ports:
+      - 9093:9093
+    command: --config.file=/alertmanager/alertmanager.yaml --log.level=debug
+  
   opensearch:
     image: ${OPENSEARCH_IMAGE}
     container_name: opensearch

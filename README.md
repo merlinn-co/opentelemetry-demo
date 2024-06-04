@@ -1,4 +1,5 @@
 <!-- markdownlint-disable-next-line -->
+
 # <img src="https://opentelemetry.io/img/logos/opentelemetry-logo-nav.png" alt="OTel logo" width="45"> OpenTelemetry Demo
 
 [![Slack](https://img.shields.io/badge/slack-@cncf/otel/demo-brightgreen.svg?logo=slack)](https://cloud-native.slack.com/archives/C03B4CWV4DA)
@@ -55,7 +56,7 @@ adding a link below. The community is committed to maintaining the project and
 keeping it up to date for you.
 
 |                                         |                             |                                                                |
-|-----------------------------------------|-----------------------------|----------------------------------------------------------------|
+| --------------------------------------- | --------------------------- | -------------------------------------------------------------- |
 | [AlibabaCloud LogService][AlibabaCloud] | [Elastic][Elastic]          | [New Relic][NewRelic]                                          |
 | [AppDynamics][AppDynamics]              | [Google Cloud][GoogleCloud] | [OpenSearch][OpenSearch]                                       |
 | [Aspecto][Aspecto]                      | [Grafana Labs][GrafanaLabs] | [Sentry][Sentry]                                               |
@@ -136,3 +137,39 @@ Emeritus:
 [Teletrace]: https://github.com/teletrace/opentelemetry-demo
 [Tracetest]: https://github.com/kubeshop/opentelemetry-demo
 [Uptrace]: https://github.com/uptrace/uptrace/tree/master/example/opentelemetry-demo
+
+## Custom fork instructions
+
+This is a fork of the original opentelemetry-demo. It contains the following modifications:
+
+- Contains otel-col changes for exporting logs to loki and/or Coralogix.
+- Uses alertmanager to fire alerts based on Prometheus. Alert manager is configured
+- Contains some UI changes
+
+### Export logs to Coralogix
+
+In order to export logs to Coralogix, you need to change the root .env file.
+
+Go to the root .env and modify the following vars:
+
+- `CORALOGIX_DOMAIN`. For example: eu2.coralogix.com
+- `CORALOGIX_PRIVATE_KEY`. This should be your "Send Your Data" key. Go to Data Flow -> API Keys -> Send Your Data to generate a new key.
+
+> `CORALOGIX_APP_NAME` and `CORALOGIX_SUBSYS_NAME` can stay the same.
+
+For more information, see this official blog post:
+https://coralogix.com/blog/configure-otel-demo-send-telemetry-data-coralogix/
+
+### Configure Grafana <-> Opsgenie
+
+If you want to send your Grafana alerts to Opsgenie to trigger incidents, you need to change the `opsgenie.yaml` file.
+
+Go to `opsgenie.yaml` and change `apiKey` field. This should be a Opsgenie API key.
+
+To generate an API key, go to your Opsgenie dashboard. Click Settings and go to Integrations. In the integrations screen, click "Add integration". Search for "API" and select it. Afterwards, click "Enable integration". That's it. Now you should see your newly created API key.
+
+For more information, checout our docs: https://docs.merlinn.co/Integrations/Opsgenie
+
+### Configure Alert Manager <-> Slack messages
+
+In order to connect alertmanager to Slack, you can generate a [webhook url](https://api.slack.com/messaging/webhooks) and insert it into alertmanager-config.yaml.
