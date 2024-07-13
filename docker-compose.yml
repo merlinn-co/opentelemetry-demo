@@ -754,14 +754,14 @@ services:
     ports:
       - "${PROMETHEUS_SERVICE_PORT}:${PROMETHEUS_SERVICE_PORT}"
     logging: *logging
-  alert-manager:
-    image: prom/alertmanager
-    container_name: alert-manager
-    volumes:
-      - "./src/prometheus/alertmanager-config.yaml:/alertmanager/alertmanager.yaml"
-    ports:
-      - 9093:9093
-    command: --config.file=/alertmanager/alertmanager.yaml --log.level=debug
+  # alert-manager:
+  #   image: prom/alertmanager
+  #   container_name: alert-manager
+  #   volumes:
+  #     - "./src/prometheus/alertmanager-config.yaml:/alertmanager/alertmanager.yaml"
+  #   ports:
+  #     - 9093:9093
+  #   command: --config.file=/alertmanager/alertmanager.yaml --log.level=debug
   
   opensearch:
     image: ${OPENSEARCH_IMAGE}
