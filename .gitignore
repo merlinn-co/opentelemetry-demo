@@ -60,3 +60,6 @@ test/tracetesting/tracetesting-vars.yaml
 /src/accountingservice/genproto
 
 docker_data
+
+# .env.override
+.env.override
