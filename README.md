@@ -181,3 +181,39 @@ For more information, checout our docs: https://docs.merlinn.co/Integrations/Ops
 ### Configure Alert Manager <-> Slack messages
 
 In order to connect alertmanager to Slack, you can generate a [webhook url](https://api.slack.com/messaging/webhooks) and insert it into alertmanager-config.yaml.
+
+### Sync fork with upstream
+
+In order to sync the fork, follow these steps:
+
+1. In your local folder, checkout `upstream/main`:
+
+```bash
+git checkout upstream/main
+```
+
+2. Pull the latest changes:
+
+```bash
+git pull upstream main
+```
+
+3. Rebase our main into the local upstream branch and solve conflicts (make sure to do `git rebase --continue` in between conflicts.)
+
+```bash
+git rebase main
+```
+
+4. Checkout our local main:
+
+```bash
+git checkout main
+```
+
+5. Rebase local upstream into main
+
+```bash
+git rebase upstream/main
+```
+
+6. Solve all the conflicts (similar to step 3, with `git rebase --continue`).
