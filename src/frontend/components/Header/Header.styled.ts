@@ -40,6 +40,7 @@ export const NavBarBrand = styled(Link)`
   display: flex;
   align-items: center;
   padding: 0;
+  text-decoration: none;
 `;
 
 export const BrandImg = styled.img.attrs({
