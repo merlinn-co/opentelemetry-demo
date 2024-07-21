@@ -39,11 +39,13 @@ from openfeature.contrib.hook.opentelemetry import TracingHook
 
 from playwright.async_api import Route, Request
 
-logger_provider = LoggerProvider(resource=Resource.create(
+logger_provider = LoggerProvider(
+    resource=Resource.create(
         {
             "service.name": "loadgenerator",
         }
-    ),)
+    ),
+)
 set_logger_provider(logger_provider)
 
 exporter = OTLPLogExporter(insecure=True)
@@ -69,13 +71,20 @@ URLLib3Instrumentor().instrument()
 logging.info("Instrumentation complete")
 
 # Initialize Flagd provider
-api.set_provider(FlagdProvider(host=os.environ.get('FLAGD_HOST', 'flagd'), port=os.environ.get('FLAGD_PORT', 8013)))
+api.set_provider(
+    FlagdProvider(
+        host=os.environ.get("FLAGD_HOST", "flagd"),
+        port=os.environ.get("FLAGD_PORT", 8013),
+    )
+)
 api.add_hooks([TracingHook()])
+
 
 def get_flagd_value(FlagName):
     # Initialize OpenFeature
     client = api.get_client()
     return client.get_integer_value(FlagName, 0)
+
 
 categories = [
     "binoculars",
@@ -100,8 +109,9 @@ products = [
     "HQTGWGPNH4",
 ]
 
-people_file = open('people.json')
+people_file = open("people.json")
 people = json.load(people_file)
+
 
 class WebsiteUser(HttpUser):
     wait_time = between(1, 10)
@@ -121,7 +131,7 @@ class WebsiteUser(HttpUser):
         }
         self.client.get("/api/recommendations", params=params)
 
-    @task(3)
+    @task(20)
     def get_ads(self):
         params = {
             "contextKeys": [random.choice(categories)],
@@ -178,9 +188,12 @@ class WebsiteUser(HttpUser):
         self.index()
 
 
-browser_traffic_enabled = os.environ.get("LOCUST_BROWSER_TRAFFIC_ENABLED", "").lower() in ("true", "yes", "on")
+browser_traffic_enabled = os.environ.get(
+    "LOCUST_BROWSER_TRAFFIC_ENABLED", ""
+).lower() in ("true", "yes", "on")
 
 if browser_traffic_enabled:
+
     class WebsiteBrowserUser(PlaywrightUser):
         headless = True  # to use a headless browser, without a GUI
 
@@ -189,10 +202,12 @@ if browser_traffic_enabled:
         async def open_cart_page_and_change_currency(self, page: PageWithRetry):
             try:
                 page.on("console", lambda msg: print(msg.text))
-                await page.route('**/*', add_baggage_header)
+                await page.route("**/*", add_baggage_header)
                 await page.goto("/cart", wait_until="domcontentloaded")
-                await page.select_option('[name="currency_code"]', 'CHF')
-                await page.wait_for_timeout(2000)  # giving the browser time to export the traces
+                await page.select_option('[name="currency_code"]', "CHF")
+                await page.wait_for_timeout(
+                    2000
+                )  # giving the browser time to export the traces
             except:
                 pass
 
@@ -201,19 +216,27 @@ if browser_traffic_enabled:
         async def add_product_to_cart(self, page: PageWithRetry):
             try:
                 page.on("console", lambda msg: print(msg.text))
-                await page.route('**/*', add_baggage_header)
+                await page.route("**/*", add_baggage_header)
                 await page.goto("/", wait_until="domcontentloaded")
-                await page.click('p:has-text("Roof Binoculars")', wait_until="domcontentloaded")
-                await page.click('button:has-text("Add To Cart")', wait_until="domcontentloaded")
-                await page.wait_for_timeout(2000)  # giving the browser time to export the traces
+                await page.click(
+                    'p:has-text("Roof Binoculars")', wait_until="domcontentloaded"
+                )
+                await page.click(
+                    'button:has-text("Add To Cart")', wait_until="domcontentloaded"
+                )
+                await page.wait_for_timeout(
+                    2000
+                )  # giving the browser time to export the traces
             except:
                 pass
 
 
 async def add_baggage_header(route: Route, request: Request):
-    existing_baggage = request.headers.get('baggage', '')
+    existing_baggage = request.headers.get("baggage", "")
     headers = {
         **request.headers,
-        'baggage': ', '.join(filter(None, (existing_baggage, 'synthetic_request=true')))
+        "baggage": ", ".join(
+            filter(None, (existing_baggage, "synthetic_request=true"))
+        ),
     }
     await route.continue_(headers=headers)

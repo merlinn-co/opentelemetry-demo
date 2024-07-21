@@ -745,7 +745,6 @@ services:
       - --enable-feature=exemplar-storage
       - --enable-feature=otlp-write-receiver
     volumes:
-      - ./src/prometheus/rules-config.yaml:/etc/prometheus/rules-config.yaml
       - ./src/prometheus/prometheus-config.yaml:/etc/prometheus/prometheus-config.yaml
       - ./src/prometheus/web-config.yaml:/etc/prometheus/web-config.yaml
     deploy:

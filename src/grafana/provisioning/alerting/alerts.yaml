@@ -3,7 +3,7 @@ groups:
   - orgId: 1
     name: topaz
     folder: Demo
-    interval: 5m
+    interval: 10s
     rules:
       - uid: adrr3e19t5iwwc
         title: adservice warn
@@ -12,7 +12,7 @@ groups:
           - refId: A
             queryType: range
             relativeTimeRange:
-              from: 600
+              from: 10
               to: 0
             datasourceUid: P8E80F9AEF21F6940
             model:
@@ -28,7 +28,7 @@ groups:
               refId: A
           - refId: B
             relativeTimeRange:
-              from: 600
+              from: 10
               to: 0
             datasourceUid: __expr__
             model:
@@ -56,7 +56,7 @@ groups:
               type: reduce
           - refId: C
             relativeTimeRange:
-              from: 600
+              from: 10
               to: 0
             datasourceUid: __expr__
             model:
@@ -84,7 +84,7 @@ groups:
               type: threshold
         noDataState: NoData
         execErrState: Error
-        for: 5m
+        for: 5s
         annotations:
           description: ""
           runbook_url: ""

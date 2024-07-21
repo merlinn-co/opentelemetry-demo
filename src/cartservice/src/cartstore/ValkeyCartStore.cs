@@ -74,7 +74,8 @@ public class ValkeyCartStore : ICartStore
             if (_redis == null || !_redis.IsConnected)
             {
                 _logger.LogError("Wasn't able to connect to redis");
-
+                _logger.LogInformation("Wasn't able to connect to redis");
+                
                 // We weren't able to connect to Redis despite some retries with exponential backoff.
                 throw new ApplicationException("Wasn't able to connect to redis");
             }
